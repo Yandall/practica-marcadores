@@ -1,10 +1,15 @@
 const express = require("express")
 const app = express()
+const path = require("path")
 app.use(express.json())
 
 
 app.get("/", (req, res) =>{
-    res.send("<h1>Hello World!</h1>")
+    res.sendFile(path.join(__dirname, "documents/index.html"))
+
+app.get("/styles.css", (req, res) =>{
+    res.sendFile(path.join(__dirname, "documents/css/styles.css"))
+    })
 })
 
 const route_crud = require("./routes/crud")

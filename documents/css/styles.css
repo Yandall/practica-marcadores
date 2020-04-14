@@ -1,0 +1,38 @@
+.nav{
+    padding: 20px;
+    margin-bottom: 40px;
+    background: rgb(52, 58, 64);
+}
+
+a{
+    text-decoration: none;
+    font-size: 2em;
+}
+
+.container-md{
+    text-align: center;
+}
+
+.lead{
+    font-size: 2em;
+}
+
+.btn{
+    margin: 30px 0 50px 0;
+}
+
+.formulario{
+    padding: 30px 30px 0 30px;
+    text-align: left;
+}
+
+label{
+    font-weight: 500;
+}
+.table{
+    margin-bottom: 50px;
+}
+
+.lista tr:hover{
+    background: rgba(52, 58, 64, 0.4);
+}

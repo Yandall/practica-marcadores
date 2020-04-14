@@ -1,23 +1,32 @@
 const express = require("express")
 const router = express.Router()
-
+const path = require("path")
 const _controlador = require("../controller/crud")
 
 router.get("/crud", (req, res) =>{
-    try{
-      _controlador
-      .obtenerPaginas()
-      .then(resultado => {
-        res.send(resultado.rows)
-      })
-      .catch(error =>{
-        res.send(error)
-      })
-      
-    } catch (error) {
-      res.send(error)
-    }
+    
+    res.sendFile(path.join(__dirname, "../documents/crud.html"))
 
+})
+
+router.get("/functions.js", (req, res) =>{
+  res.sendFile(path.join(__dirname, "../documents/js/functions.js"))
+})
+
+router.get("/crud/all", (req, res) =>{
+  try{
+    _controlador
+    .obtenerPaginas()
+    .then(resultado => {
+      res.send(resultado.rows)
+    })
+    .catch(error =>{
+      res.send(error)
+    })
+    
+  } catch (error) {
+    res.send(error)
+  }
 })
 
 router.post("/crud", (req, res) =>{
