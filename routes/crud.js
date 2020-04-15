@@ -13,8 +13,13 @@ router.get("/functions.js", (req, res) =>{
   res.sendFile(path.join(__dirname, "../documents/js/functions.js"))
 })
 
-router.get("/crud/all", (req, res) =>{
-  try{
+router.get("/styles.css", (req, res) =>{
+  res.sendFile(path.join(__dirname, "../documents/css/styles.css"))
+})
+
+router.get("/crud/:id", (req, res) =>{
+  let id = req.params.id
+  if(id == "all"){
     _controlador
     .obtenerPaginas()
     .then(resultado => {
@@ -22,7 +27,23 @@ router.get("/crud/all", (req, res) =>{
     })
     .catch(error =>{
       res.send(error)
+    })  
+  } else {
+    _controlador
+    .obtenerPagina(id)
+    .then(resultado =>{
+      res.send(resultado.rows)
+      
+    }).catch(error =>{
+      res.send(error)
     })
+  }
+  
+})
+
+router.get("/crud/all", (req, res) =>{
+  try{
+    
     
   } catch (error) {
     res.send(error)
@@ -32,14 +53,13 @@ router.get("/crud/all", (req, res) =>{
 router.post("/crud", (req, res) =>{
     (async () => {
       try {
-        let pagina = req.body
-        
+        let pagina = req.body        
         await _controlador.validarPagina(pagina)
         await _controlador.guardarPagina(pagina)
-        res.send({mensaje: "Página guardada con exito", info: pagina})
+        res.send({ok:"true" ,mensaje: "Página guardada con exito", info: pagina})
 
       } catch (error) {
-        res.send({ Error: error.message})
+        res.send({ok:"false", Error: error.message})
       }
     })()
 })
@@ -51,23 +71,22 @@ router.put("/crud", (req, res) =>{
       if(!nuevaPagina.nombre){
         throw new Error("Debes ingresar un nombre válido")
       }
-
-      let respuesta = await _controlador.editarPagina(nuevaPagina.url, nuevaPagina.nombre, nuevaPagina.descripcion)
+      let respuesta = await _controlador.editarPagina(nuevaPagina.id, nuevaPagina.nombre, nuevaPagina.descripcion)
       res.send({mensaje: `Se editaron ${respuesta.rowCount} paginas`})
     } catch (error) {
-      res.send({ Error: error.message})
+      res.send({mensaje: error.message})
     }
   })()
 })
 
-router.delete("/crud", (req, res) =>{
+router.delete("/crud/:id", (req, res) =>{
   (async () =>{
     try{
-      let pagina = req.body
-      let respuesta = await _controlador.borrarPagina(pagina.url)
+      let id = req.params.id
+      let respuesta = await _controlador.borrarPagina(id)
       res.send({mensaje: `Se eliminaron ${respuesta.rowCount} paginas`})
     } catch (error){
-      res.send({ Error: error.message})
+      res.send(error.message)
     }
   })()
 })

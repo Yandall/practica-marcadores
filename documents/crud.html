@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Crud</title>
 </head>
 <body>
@@ -31,7 +31,8 @@
             </div>
           </form>
           
-          <button type="button" class="btn btn-primary" onclick="crearPagina()">Añadir</button>
+          <button type="button" class="btn btn-primary" onclick="crearPagina()" id="btnCrear">Añadir</button>
+          <button type="button" class="btn btn-primary" onclick="editarPagina()" id="btnEditar" style="display: none;">Editar</button>
 
           <table class="table table-striped">
             <thead class="thead-dark">

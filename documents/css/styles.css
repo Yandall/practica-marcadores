@@ -20,6 +20,9 @@ a{
 .btn{
     margin: 30px 0 50px 0;
 }
+.lista .btn{
+    margin: 0 5px 0 5px
+}
 
 .formulario{
     padding: 30px 30px 0 30px;
@@ -31,8 +34,4 @@ label{
 }
 .table{
     margin-bottom: 50px;
-}
-
-.lista tr:hover{
-    background: rgba(52, 58, 64, 0.4);
 }
